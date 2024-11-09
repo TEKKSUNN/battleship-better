@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "setup": "npm init && npm i -D webpack webpack-cli css-loader style-loader html-loader html-webpack-plugin webpack-dev-server babel-loader @babel/core @babel/preset-env babel-jest jest && npm init @eslint/config@latest && npm i --save-dev --save-exact prettier && jq 'del(.scripts.setup)' package.json > temp.json && mv temp.json package.json",
+    "build": "webpack --config webpack.prod.js",
+    "dev": "webpack serve --config webpack.dev.js",
+    "fix": "eslint --fix src/ tests/ && npx prettier . --write src/* tests/*",
+    "test": "jest --watch *.js"
+  }
+}
