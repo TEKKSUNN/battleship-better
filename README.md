@@ -16,5 +16,5 @@ Feel free to fork the project and submit issues or pull requests if you have sug
 
 # License
 
-This project is licensed under the [MIT License](LICENSE)
+This project is open-source and licensed under the [MIT License](LICENSE).
 
