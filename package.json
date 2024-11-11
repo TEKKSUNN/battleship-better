@@ -2,7 +2,7 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack serve --config webpack.dev.js",
-    "fix": "eslint --fix src/ tests/ && npx prettier . --write src/* tests/*",
+    "fix": "eslint --fix src/ tests/ && npx prettier --write src/* tests/*",
     "test": "jest --watch *.js"
   },
   "name": "@tekksunn/battleship-better",
