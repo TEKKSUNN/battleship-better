@@ -1,4 +1,5 @@
 import Gameboard from "../../src/classes/gameboard";
+import Ship from "../../src/classes/ships";
 
 describe("Gameboard", () => {
   describe("Constructor", () => {
@@ -31,6 +32,102 @@ describe("Gameboard", () => {
       expect(() => new Gameboard(0)).toThrow(errorMsg);
       expect(() => new Gameboard(-5)).toThrow(errorMsg);
       expect(() => new Gameboard(-9)).toThrow(errorMsg);
+    });
+  });
+
+  describe("Methods", () => {
+    // Make a test value that will be initialized each test.
+    let gameboard;
+    beforeEach(() => {
+      gameboard = new Gameboard();
+    });
+
+    describe("placeShip()", () => {
+      test("should throw an error when missing variables.", () => {
+        const errorMsg = "Gameboard.placeShip() doesn't have enough arguments.";
+        expect(() => gameboard.placeShip(new Ship(5), 3, 5)).toThrow(errorMsg);
+        expect(() => gameboard.placeShip(new Ship(5), 3)).toThrow(errorMsg);
+        expect(() => gameboard.placeShip(new Ship(5))).toThrow(errorMsg);
+        expect(() => gameboard.placeShip()).toThrow(errorMsg);
+      });
+
+      test("should throw an error when positions aren't safe integers.", () => {
+        const errorMsg =
+          "Gameboard.placeShip() xPos, yPos must be safe integers.";
+        expect(() =>
+          gameboard.placeShip(new Ship(5), 3.4, 5.8, "landscape"),
+        ).toThrow(errorMsg);
+        expect(() =>
+          gameboard.placeShip(new Ship(5), 2.5, 7.9, "vertical"),
+        ).toThrow(errorMsg);
+        expect(() =>
+          gameboard.placeShip(new Ship(5), 9.2, 4.4, "vertical"),
+        ).toThrow(errorMsg);
+      });
+
+      test("should throw an error when positions are greater than or less than board's indice length", () => {
+        const errorMsg =
+          "Gameboard.placeShip() xPos, yPos must be within board's indice length.";
+        expect(() =>
+          gameboard.placeShip(new Ship(5), 3, -1, "landscape"),
+        ).toThrow(errorMsg);
+        expect(() =>
+          gameboard.placeShip(new Ship(5), 100, -5, "vertical"),
+        ).toThrow(errorMsg);
+        expect(() =>
+          gameboard.placeShip(new Ship(5), 1, 90, "vertical"),
+        ).toThrow(errorMsg);
+      });
+
+      test("should throw an error when orientation isn't landscape nor portrait.", () => {
+        const errorMsg =
+          'Gameboard.placeShip() orientation must be "landscape" or "portrait".';
+        expect(() => gameboard.placeShip(new Ship(5), 3, 5, "orange")).toThrow(
+          errorMsg,
+        );
+        expect(() => gameboard.placeShip(new Ship(5), 3, 5, "apple")).toThrow(
+          errorMsg,
+        );
+        expect(() => gameboard.placeShip(new Ship(5), 3, 5, "mango")).toThrow(
+          errorMsg,
+        );
+      });
+
+      test("should be able to place ships horizontally.", () => {
+        // Tests the X axis of the gameboard.
+        function testXCoords(ship, yPos, xPos) {
+          for (let i = xPos; i < ship.length; i++) {
+            expect(typeof gameboard.gameboard[yPos][i]).toBe(typeof ship);
+          }
+        }
+
+        // Make ships for testing.
+        const ships = [new Ship(5), new Ship(3), new Ship(2)];
+
+        // Test all ships.
+        ships.forEach((ship, index) => {
+          gameboard.placeShip(ship, 0, index, "landscape");
+          testXCoords(ship, 0, index);
+        });
+      });
+
+      test("should be able to place ships vertically.", () => {
+        // Tests the X axis of the gameboard.
+        function testYCoords(ship, yPos, xPos) {
+          for (let i = yPos; i < ship.length; i++) {
+            expect(typeof gameboard.gameboard[i][xPos]).toBe(typeof ship);
+          }
+        }
+
+        // Make ships for testing.
+        const ships = [new Ship(5), new Ship(3), new Ship(2)];
+
+        // Test all ships.
+        ships.forEach((ship, index) => {
+          gameboard.placeShip(ship, index, 0, "portrait");
+          testYCoords(ship, index, 0);
+        });
+      });
     });
   });
 });
