@@ -158,5 +158,51 @@ describe("Gameboard", () => {
         });
       });
     });
+
+    describe("isAllShipSunk()", () => {
+      test("should return true if all ships are sunk", () => {
+        // Make ships for testing.
+        const ships = [new Ship(5), new Ship(3), new Ship(2)];
+
+        // Will hit all ships squares based on ship length.
+        function hitAllHorizontally(ship, yPos, start) {
+          for (let i = start; i < ship.length; i++) {
+            gameboard.receiveAttack(yPos, i);
+          }
+        }
+
+        // Place and hit all ships.
+        ships.forEach((ship, index) => {
+          gameboard.placeShip(ship, index, 0, "landscape");
+          hitAllHorizontally(ship, index, 0);
+        });
+
+        // Make sure all ships were sunk.
+        expect(gameboard.isAllShipSunk()).toBeTruthy();
+      });
+
+      test("should return false if not all ships are sunk", () => {
+        // Make ships for testing.
+        const ships = [new Ship(5), new Ship(3), new Ship(2)];
+
+        // Will hit all ships squares based on ship length.
+        function hitAllHorizontally(ship, yPos, start) {
+          for (let i = start; i < ship.length; i++) {
+            gameboard.receiveAttack(yPos, i);
+          }
+        }
+
+        // Place and hit all ships except the last ship.
+        ships.forEach((ship, index) => {
+          gameboard.placeShip(ship, index, 0, "landscape");
+          if (index !== ships.length - 1) {
+            hitAllHorizontally(ship, index, 0);
+          }
+        });
+
+        // Make sure all ships weren't sunk.
+        expect(gameboard.isAllShipSunk()).toBeFalsy();
+      });
+    });
   });
 });
