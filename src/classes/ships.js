@@ -1,13 +1,13 @@
+import ClassError from "./error";
+
 // The class to make all kinds of ships.
 export default class Ship {
   constructor(length) {
     if (!Number.isInteger(length)) {
-      throw new Error("Ship Error: Ship must have an integer as length.");
+      throw new ClassError("Ship must have an integer as length.");
     }
     if (length <= 0) {
-      throw new Error(
-        "Ship Error: Ship length cannot be less than or equal to 0.",
-      );
+      throw new ClassError("Ship length cannot be less than or equal to 0.");
     }
     this.length = length;
     this.misses = 0;
