@@ -31,27 +31,17 @@ describe("Ship Class", () => {
     });
 
     test("should throw an error when length has decimal", () => {
-      expect(() => new Ship(5.1)).toThrow(
-        "Ship Error: Ship must have an integer as length.",
-      );
-      expect(() => new Ship(2.1)).toThrow(
-        "Ship Error: Ship must have an integer as length.",
-      );
-      expect(() => new Ship(3.99)).toThrow(
-        "Ship Error: Ship must have an integer as length.",
-      );
+      const errorMsg = "Ship must have an integer as length.";
+      expect(() => new Ship(5.1)).toThrow(errorMsg);
+      expect(() => new Ship(2.1)).toThrow(errorMsg);
+      expect(() => new Ship(3.99)).toThrow(errorMsg);
     });
 
     test("should throw an error when length is less than or equal to 0", () => {
-      expect(() => new Ship(0)).toThrow(
-        "Ship Error: Ship length cannot be less than or equal to 0.",
-      );
-      expect(() => new Ship(-10)).toThrow(
-        "Ship Error: Ship length cannot be less than or equal to 0.",
-      );
-      expect(() => new Ship(-218)).toThrow(
-        "Ship Error: Ship length cannot be less than or equal to 0.",
-      );
+      const errorMsg = "Ship length cannot be less than or equal to 0.";
+      expect(() => new Ship(0)).toThrow(errorMsg);
+      expect(() => new Ship(-10)).toThrow(errorMsg);
+      expect(() => new Ship(-218)).toThrow(errorMsg);
     });
   });
 
