@@ -76,3 +76,10 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+/* Set the default background image */
+body {
+  width: auto;
+  height: 100vh;
+  background-image: linear-gradient(#1E3A8A, #3B82F6);
+}
