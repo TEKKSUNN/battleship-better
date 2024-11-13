@@ -6,17 +6,18 @@ describe("Gameboard", () => {
     test("should return a gameboard object.", () => {
       expect(new Gameboard()).toEqual({
         gameboard: [
-          [[], [], [], [], [], [], [], [], [], []],
-          [[], [], [], [], [], [], [], [], [], []],
-          [[], [], [], [], [], [], [], [], [], []],
-          [[], [], [], [], [], [], [], [], [], []],
-          [[], [], [], [], [], [], [], [], [], []],
-          [[], [], [], [], [], [], [], [], [], []],
-          [[], [], [], [], [], [], [], [], [], []],
-          [[], [], [], [], [], [], [], [], [], []],
-          [[], [], [], [], [], [], [], [], [], []],
-          [[], [], [], [], [], [], [], [], [], []],
+          [null, null, null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null, null, null],
         ],
+        misses: 0,
       });
     });
 
@@ -97,7 +98,7 @@ describe("Gameboard", () => {
         // Tests the X axis of the gameboard.
         function testXCoords(ship, yPos, xPos) {
           for (let i = xPos; i < ship.length; i++) {
-            expect(typeof gameboard.gameboard[yPos][i]).toBe(typeof ship);
+            expect(gameboard.gameboard[yPos][i]).not.toBeNull();
           }
         }
 
@@ -106,8 +107,8 @@ describe("Gameboard", () => {
 
         // Test all ships.
         ships.forEach((ship, index) => {
-          gameboard.placeShip(ship, 0, index, "landscape");
-          testXCoords(ship, 0, index);
+          gameboard.placeShip(ship, index, 0, "landscape");
+          testXCoords(ship, index, 0);
         });
       });
 
@@ -115,7 +116,7 @@ describe("Gameboard", () => {
         // Tests the X axis of the gameboard.
         function testYCoords(ship, yPos, xPos) {
           for (let i = yPos; i < ship.length; i++) {
-            expect(typeof gameboard.gameboard[i][xPos]).toBe(typeof ship);
+            expect(gameboard.gameboard[i][xPos]).not.toBeNull();
           }
         }
 
@@ -124,8 +125,36 @@ describe("Gameboard", () => {
 
         // Test all ships.
         ships.forEach((ship, index) => {
-          gameboard.placeShip(ship, index, 0, "portrait");
-          testYCoords(ship, index, 0);
+          gameboard.placeShip(ship, 0, index, "portrait");
+          testYCoords(ship, 0, index);
+        });
+      });
+    });
+
+    describe("receiveAttack()", () => {
+      test("should record misses", () => {
+        for (let i = 0; i < 10; i++) {
+          gameboard.receiveAttack(i, i);
+        }
+        expect(gameboard.misses).toBe(10);
+      });
+
+      test("should record attacks", () => {
+        // Make ships for testing.
+        const ships = [new Ship(5), new Ship(3), new Ship(2)];
+
+        // Place all ships.
+        ships.forEach((ship, index) => {
+          gameboard.placeShip(ship, index, 0, "landscape");
+        });
+
+        // Hit vertically-downward.
+        for (let i = 0; i < ships.length; i++) {
+          gameboard.receiveAttack(i, 0);
+        }
+
+        ships.forEach((ship) => {
+          expect(ship.hits).toBe(1);
         });
       });
     });
