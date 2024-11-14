@@ -6,3 +6,11 @@ export default function create(HTMLElementTagName) {
   }
   return document.createElement(HTMLElementTagName);
 }
+
+export const getContent = () => document.getElementById("content");
+
+export function appendAll(parentElement, ...elements) {
+  elements.forEach((element) => {
+    parentElement.append(element);
+  });
+}
