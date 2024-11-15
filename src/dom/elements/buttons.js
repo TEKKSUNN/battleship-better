@@ -39,3 +39,25 @@ export function createImageButton(imageURL, className, callbackfn) {
 
   return image;
 }
+
+// Returns an HTMLButtonElement with type: submit.
+export function createSubmitButton(textContent, className, callbackfn) {
+  // Make button.
+  const button = createButton(textContent, className, callbackfn);
+
+  // Set type of button.
+  button.setAttribute("type", "submit");
+
+  return button;
+}
+
+// Returns an HTMLButtonElement with type: submit.
+export function createImageSubmitButton(imageURL, className, callbackfn) {
+  // Make button.
+  const button = createImageButton(imageURL, className, callbackfn);
+
+  // Set type of button.
+  button.setAttribute("type", "submit");
+
+  return button;
+}
