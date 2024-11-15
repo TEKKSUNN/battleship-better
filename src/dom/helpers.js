@@ -9,6 +9,8 @@ export default function create(HTMLElementTagName) {
 
 export const getContent = () => document.getElementById("content");
 
+export const getDialogs = () => document.getElementById("dialogs");
+
 export function appendAll(parentElement, ...elements) {
   elements.forEach((element) => {
     parentElement.append(element);
