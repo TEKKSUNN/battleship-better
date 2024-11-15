@@ -280,7 +280,7 @@ body {
   padding: 40px;
   box-shadow: var(--shadow);
   color: white;
-  font: 600 30px 'Open Sans';
+  font: 600 30px "Open Sans";
   border-radius: 5px;
 }
 
