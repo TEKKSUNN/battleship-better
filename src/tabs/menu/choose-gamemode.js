@@ -46,8 +46,8 @@ export default function loadChooseGamemode() {
 
   // Make fn that changes tabs based on value of value.
   const changePhase = () => {
-    closeDialog();
     const nextPhase = document.getElementById("cg-value").textContent;
+    closeDialog();
     if (nextPhase === "Player") {
       loadPVP();
     } else {
