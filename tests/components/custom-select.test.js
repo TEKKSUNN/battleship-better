@@ -14,4 +14,11 @@ describe("createCustomSelect()", () => {
     expect(() => createCustomSelect([4, 5, 6, 7])).toThrow(errorMsg);
     expect(() => createCustomSelect([8, 9, 10, 11, 12])).toThrow(errorMsg);
   });
+
+  test("should throw an error when options given is not an array.", () => {
+    const errorMsg = "createCustomSelect() must have an array as options.";
+    expect(() => createCustomSelect(1)).toThrow(errorMsg);
+    expect(() => createCustomSelect({ o: 1 })).toThrow(errorMsg);
+    expect(() => createCustomSelect("Jojo")).toThrow(errorMsg);
+  });
 });
