@@ -8,6 +8,9 @@
   --menu-btn-pady: 2.5vh;
   --menu-text-size: calc(4.5rem - 5ex);
   --icon-size: 50px;
+  --shadow: 4px 4px 4px #e5e7eb25;
+  --x-normal: hsl(0, 100%, 50%);
+  --x-hover: hsl(0, 100%, 40%);
 }
 
 /* Box sizing rules */
@@ -157,7 +160,7 @@ body {
   font-weight: 600;
   font-size: 30px;
   gap: 20px;
-  box-shadow: 4px 4px 4px #e5e7eb25;
+  box-shadow: var(--shadow);
 }
 
 #cg-form {
@@ -246,4 +249,60 @@ body {
 
 .option:not(:last-child) {
   border-bottom: 1px solid #00000025;
+}
+
+/* Style credits tab. */
+.credits {
+  display: grid;
+  grid-template: repeat(5, 1fr) / repeat(5, 1fr);
+  grid-template-areas:
+    ". . . . ."
+    ". c c c ."
+    ". c c c ."
+    ". c c c ."
+    ". . . . .";
+}
+
+.credits-div {
+  grid-area: c;
+  position: relative;
+  background-color: #3b82f6;
+  padding: 40px;
+  box-shadow: var(--shadow);
+  color: white;
+  font: 600 30px 'Open Sans';
+  border-radius: 5px;
+}
+
+.credits button {
+  cursor: pointer;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  border-radius: 10px;
+  border: 0;
+}
+
+.credits-exit {
+  background-color: var(--x-normal);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.credits-exit:hover {
+  background-color: var(--x-hover);
+}
+
+.credits-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.credit-link {
+  color: white;
+}
+
+.credit-link:hover {
+  text-decoration: none;
 }
