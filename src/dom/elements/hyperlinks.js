@@ -25,5 +25,8 @@ export function createAnchor(textContent, link, className, id) {
     a.id = id;
   }
 
+  // Set rel for security purposes.
+  a.rel = "noreferrer noopener";
+
   return a;
 }
