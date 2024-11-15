@@ -7,6 +7,7 @@
   --menu-btn-padx: 2.5vw;
   --menu-btn-pady: 2.5vh;
   --menu-text-size: calc(4.5rem - 5ex);
+  --icon-size: 50px;
 }
 
 /* Box sizing rules */
@@ -141,4 +142,108 @@ body {
   height: 25vh;
   width: auto;
   object-fit: contain;
+}
+
+/* Style choose-gamemode dialog */
+.cg-dialog {
+  background-color: #3b82f6;
+  display: flex;
+  flex-direction: column;
+  color: var(--text-clr);
+  border: 0;
+  border-radius: 5px;
+  padding: 35px 30px;
+  font-family: "Open Sans";
+  font-weight: 600;
+  font-size: 30px;
+  gap: 20px;
+  box-shadow: 4px 4px 4px #e5e7eb25;
+}
+
+#cg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cg-input-group {
+  display: flex;
+  gap: 10px;
+}
+
+.cg-buttons {
+  display: flex;
+}
+
+.cg-option {
+  background-color: white;
+  color: black;
+  padding: 0 35px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cg-buttons {
+  display: flex;
+  gap: 20px;
+  align-self: flex-end;
+}
+
+.cg-buttons button {
+  height: var(--icon-size);
+  width: var(--icon-size);
+  object-fit: cover;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer;
+}
+
+.cg-confirm {
+  background-color: #00ff00;
+}
+
+.cg-cancel {
+  background-color: #ff0000;
+}
+
+#cg-value {
+  cursor: pointer;
+}
+
+/* Style custom select */
+.select-viewable {
+  display: flex;
+  gap: 5px;
+}
+
+.dropdown-icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  object-fit: cover;
+  border-radius: 5px;
+  border: 0;
+  background-color: white;
+  cursor: pointer;
+}
+
+.optList {
+  background-color: white;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.option {
+  background-color: #3b82f625;
+  color: black;
+  padding: 0 30px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.option:not(:last-child) {
+  border-bottom: 1px solid #00000025;
 }
