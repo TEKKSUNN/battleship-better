@@ -20,3 +20,33 @@ export default class Ship {
     return this.length <= this.hits;
   }
 }
+
+export class Battleship extends Ship {
+  constructor() {
+    super(4);
+  }
+}
+
+export class Cruiser extends Ship {
+  constructor() {
+    super(5);
+  }
+}
+
+export class PatrolBoat extends Ship {
+  constructor() {
+    super(3);
+  }
+}
+
+export class RescueShip extends Ship {
+  constructor() {
+    super(2);
+  }
+}
+
+export class Destroyer extends Ship {
+  constructor() {
+    super(3);
+  }
+}
