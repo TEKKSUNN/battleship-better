@@ -7,7 +7,7 @@ export function createButton(textContent, className, callbackfn) {
   const btn = create("button");
 
   // Throw error when no textContent.
-  if (!textContent) {
+  if (!textContent && textContent !== "") {
     throw new HTMLError("createButton() must have a textContent.");
   }
 
