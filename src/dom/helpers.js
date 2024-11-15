@@ -20,3 +20,7 @@ export function appendAll(parentElement, ...elements) {
 export function clearDialogs() {
   getDialogs().innerHTML = "";
 }
+
+export function clearContent() {
+  getContent().innerHTML = "";
+}
