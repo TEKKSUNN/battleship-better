@@ -1,3 +1,14 @@
+/* Get fonts */
+@import url("../assets/fonts/stylesheet.css");
+
+/* Set custom values */
+:root {
+  --text-clr: #ffffff;
+  --menu-btn-padx: 2.5vw;
+  --menu-btn-pady: 2.5vh;
+  --menu-text-size: calc(4.5rem - 5ex);
+}
+
 /* Box sizing rules */
 *,
 *::before,
@@ -82,4 +93,52 @@ body {
   width: auto;
   height: 100vh;
   background-image: linear-gradient(#1e3a8a, #3b82f6);
+}
+
+/* Style menu tab */
+#content.menu {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+/* Change order of menu buttons */
+.btn-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Style menu buttons */
+.menu-btn {
+  font: 600 var(--menu-text-size) "Open Sans";
+  padding: var(--menu-btn-pady) var(--menu-btn-padx);
+  background-color: #3b82f6;
+  color: var(--text-clr);
+  border: 1px solid #6b7280;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 4px 4px 4px #e5e7eb25;
+}
+
+/* Alter menu buttons when hovered */
+.menu-btn:hover {
+  --added-size: 10px;
+  background-color: #1e3a8a;
+  font-size: calc(var(--menu-text-size) + var(--added-size));
+  padding: calc(var(--menu-btn-pady) + var(--added-size))
+    calc(var(--menu-btn-padx + var(--added-size)));
+  box-shadow: 4px 4px 4px #00000025;
+  border: 1px solid #00000025;
+}
+
+/* Dynamically resize website logo according to device height & width. */
+#web-logo {
+  height: 25vh;
+  width: auto;
+  object-fit: contain;
 }
