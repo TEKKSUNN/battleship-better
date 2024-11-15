@@ -60,6 +60,9 @@ export default function createCustomSelect(
   // Make the custom input div.
   const customInput = createDiv(otherSpecs.className);
 
+  // Specify its position for optList not taking space.
+  customInput.style.position = "relative";
+
   // Make the value text and dropdown icon & wrap them together.
   const wrapper = createDiv("select-viewable");
   const value = createSpan(options[0], otherSpecs.valueClassName, valueID);
@@ -97,6 +100,8 @@ export default function createCustomSelect(
   optList.style.display = "none";
   optList.style.maxHeight = "200px"; // Set maximum height for the dropdown list
   optList.style.overflowY = "auto"; // Enable scrolling if options exceed the height
+  optList.style.position = "absolute";
+  optList.style.top = "50px"; // Make it go below the optList when shown.
 
   // Toggle dropdown visibility when the input is clicked.
   icon.addEventListener("click", () => {
