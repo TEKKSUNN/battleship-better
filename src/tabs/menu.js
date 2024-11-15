@@ -4,7 +4,7 @@ import WebsiteLogo from "../../assets/menu/battleship-logo.png";
 import { createDiv } from "../dom/elements/divs";
 import { createButton } from "../dom/elements/buttons";
 import { createImage } from "../dom/elements/images";
-import { appendAll, getContent } from "../dom/helpers";
+import { appendAll, clearContent, getContent } from "../dom/helpers";
 import loadCredits from "./credits";
 import loadSettings from "./settings";
 import loadChooseGamemode from "./menu/choose-gamemode";
@@ -22,6 +22,9 @@ export default function loadMenu() {
   const settingsButton = createButton("Settings", "menu-btn", loadSettings);
   const creditsButton = createButton("Credits", "menu-btn", loadCredits);
   appendAll(buttonDiv, playButton, settingsButton, creditsButton);
+
+  // Clear content.
+  clearContent();
 
   // Append all to content.
   appendAll(content, websiteLogo, buttonDiv);
