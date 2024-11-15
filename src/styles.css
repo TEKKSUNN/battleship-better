@@ -11,6 +11,8 @@
   --shadow: 4px 4px 4px #e5e7eb25;
   --x-normal: hsl(0, 100%, 50%);
   --x-hover: hsl(0, 100%, 40%);
+  --c-normal: hsl(120, 100%, 50%);
+  --c-hover: hsl(120, 100%, 40%);
 }
 
 /* Box sizing rules */
@@ -204,11 +206,19 @@ body {
 }
 
 .cg-confirm {
-  background-color: #00ff00;
+  background-color: var(--c-normal);
+}
+
+.cg-confirm:hover {
+  background-color: var(--c-hover);
 }
 
 .cg-cancel {
-  background-color: #ff0000;
+  background-color: var(--x-normal);
+}
+
+.cg-cancel:hover {
+  background-color: var(--x-hover);
 }
 
 #cg-value {
