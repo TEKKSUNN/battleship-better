@@ -37,7 +37,7 @@ export function createImageButton(imageURL, className, callbackfn) {
   const image = createImage(imageURL, "btn-img");
   button.appendChild(image);
 
-  return image;
+  return button;
 }
 
 // Returns an HTMLButtonElement with type: submit.
