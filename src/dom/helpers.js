@@ -16,3 +16,7 @@ export function appendAll(parentElement, ...elements) {
     parentElement.append(element);
   });
 }
+
+export function clearDialogs() {
+  getDialogs().innerHTML = "";
+}
