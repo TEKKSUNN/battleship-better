@@ -83,5 +83,8 @@ export default function createCustomSelect(
   // Wrap everything up.
   appendAll(customInput, value, optList);
 
+  // Make customInput focusable using keyboard.
+  customInput.setAttribute("tabindex", "0");
+
   return customInput;
 }
