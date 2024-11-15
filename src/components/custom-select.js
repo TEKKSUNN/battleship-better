@@ -108,6 +108,11 @@ export default function createCustomSelect(
     optList.style.display = optList.style.display === "none" ? "block" : "none";
   });
 
+  // Toggle dropdown visibility when the value is clicked.
+  value.addEventListener("click", () => {
+    optList.style.display = optList.style.display === "none" ? "block" : "none";
+  });
+
   // Close dropdown if the user clicks outside the custom select input.
   document.addEventListener("click", (event) => {
     if (!customInput.contains(event.target)) {
