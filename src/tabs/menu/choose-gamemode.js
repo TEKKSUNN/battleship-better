@@ -12,6 +12,8 @@ import { createDiv } from "../../dom/elements/divs";
 import { createForm } from "../../dom/elements/forms";
 import { createPara } from "../../dom/elements/texts";
 import { appendAll, clearDialogs, getDialogs } from "../../dom/helpers";
+import loadPVE from "../playPVE";
+import loadPVP from "../playPVP";
 
 // Loads the "Choose Gamemode" dialog.
 export default function loadChooseGamemode() {
@@ -42,6 +44,17 @@ export default function loadChooseGamemode() {
   });
   appendAll(inputDiv, defaultOption, vsLabel, customSelect);
 
+  // Make fn that changes tabs based on value of value.
+  const changePhase = () => {
+    closeDialog();
+    const nextPhase = document.getElementById("cg-value").textContent;
+    if (nextPhase === "Player") {
+      loadPVP();
+    } else {
+      loadPVE();
+    }
+  };
+
   // Make cancel & confirm buttons & group them together.
   const dialogButtons = createDiv("cg-buttons");
   const cancelButton = createImageButton(
@@ -52,7 +65,7 @@ export default function loadChooseGamemode() {
   const confirmButton = createImageSubmitButton(
     ConfirmIcon,
     "cg-confirm cg-button",
-    closeDialog,
+    changePhase,
   );
   appendAll(dialogButtons, cancelButton, confirmButton);
 
