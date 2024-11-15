@@ -28,5 +28,8 @@ export function createAnchor(textContent, link, className, id) {
   // Set rel for security purposes.
   a.rel = "noreferrer noopener";
 
+  // Set target to new tab.
+  a.target = "_blank";
+
   return a;
 }
