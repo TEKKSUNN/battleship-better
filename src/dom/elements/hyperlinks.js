@@ -1,4 +1,5 @@
 import { HTMLError } from "../error";
+import create from "../helpers";
 
 // Returns an HTMLAnchorElement.
 export function createAnchor(textContent, link, className, id) {
