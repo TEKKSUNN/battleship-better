@@ -1,4 +1,11 @@
 import ClassError, { MethodError } from "./error";
+import {
+  Battleship,
+  Cruiser,
+  Destroyer,
+  PatrolBoat,
+  RescueShip,
+} from "./ships";
 
 // The board object that the Player and the Computer will use.
 export default class Gameboard {
@@ -141,5 +148,26 @@ export default class Gameboard {
         // If placement fails, try again
       }
     }
+  }
+
+  // Random places all 5 templates of ship.
+  randomPlaceAllShips() {
+    const ships = [
+      new Battleship(),
+      new Cruiser(),
+      new PatrolBoat(),
+      new RescueShip(),
+      new Destroyer(),
+    ];
+    ships.forEach((ship) => {
+      this.randomPlaceShip(ship);
+    });
+  }
+
+  // Resets gameboard map.
+  resetBoard() {
+    this.gameboard = Array.from({ length: size }, () =>
+      new Array(size).fill(null),
+    );
   }
 }
