@@ -170,5 +170,7 @@ export default class Gameboard {
     this.gameboard = Array.from({ length: 10 }, () =>
       new Array(10).fill(null),
     );
+    this.ships = [];
+    this.misses = 0;
   }
 }
