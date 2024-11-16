@@ -101,6 +101,11 @@ body {
   background-image: linear-gradient(#1e3a8a, #3b82f6);
 }
 
+/* Make content use 100% height */
+#content {
+  height: 100%;
+}
+
 /* Style menu tab */
 #content.menu {
   height: 100%;
@@ -150,6 +155,10 @@ body {
 }
 
 /* Style choose-gamemode dialog */
+button {
+  padding: 0;
+}
+
 .cg-dialog {
   background-color: #3b82f6;
   display: flex;
@@ -315,4 +324,154 @@ body {
 
 .credit-link:hover {
   text-decoration: none;
+}
+
+/* Style place-ship tab */
+.place-ship {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Style ship-handle */
+.ship-handle {
+  --square-size: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Style objective component */
+.obj {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  justify-content: center;
+  align-items: center;
+}
+
+.obj-label {
+  font: 500 15px "Open Sans";
+}
+
+.obj-msg {
+  font: 40px "Bebas Neue";
+}
+
+/* Style board */
+.grid {
+  display: flex;
+  flex-direction: column;
+  padding: 2.5px;
+  gap: 2.5px;
+  background-color: #6b7280;
+}
+
+.squares {
+  display: flex;
+  gap: 2.5px;
+}
+
+.square {
+  width: var(--square-size);
+  height: var(--square-size);
+  background-color: #e5e7eb;
+}
+
+/* Style ship bar component */
+.ship-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.ship-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.ship-squares {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5px;
+}
+
+.ship-square {
+  background-color: transparent;
+}
+
+.ship-img {
+  position: absolute;
+  top: 0px;
+}
+
+/* Rotation button */
+.rotate-div {
+  --rotate-color: #f97316;
+  --size: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.rotate-btn {
+  cursor: pointer;
+  background-color: var(--rotate-color);
+  height: var(--size);
+  width: var(--size);
+  border: 0;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.rotate-label {
+  font: bold 15px "Open Sans";
+  color: var(--rotate-color);
+}
+
+/* Style finsih buttons */
+.finish-place-btns {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.ready-button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 0;
+  font: bold 30px "Open Sans";
+  cursor: pointer;
+  color: white;
+  background-color: #00ff00;
+}
+
+.ready-button.not-ready {
+  background-color: #3f3f3f;
+  cursor: not-allowed;
+  color: #ffffff25;
+}
+
+.random-btn {
+  --size: 35px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 10px;
+  background-color: #ffe866;
+  border: 0;
+  cursor: pointer;
+  object-fit: cover;
 }
