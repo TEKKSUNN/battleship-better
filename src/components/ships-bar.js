@@ -38,49 +38,45 @@ export function createShipBar() {
   // Make the ships.
   const ships = createDiv("ships");
 
-  // Utility to add click/hold behavior
-  function addShipClickBehavior(shipElement, usedImageSrc) {
-    let timer;
-    let isHeld = false;
-
-    // Click behavior
-    shipElement.addEventListener("click", () => {
-      if (!isHeld) {
-        shipElement.querySelector("img").src = usedImageSrc;
-      }
-    });
-
-    // Click-and-hold behavior
+  // Utility to add grabbing cursor behavior
+  function addGrabbingBehavior(shipElement) {
     shipElement.addEventListener("mousedown", () => {
-      isHeld = false;
-      timer = setTimeout(() => {
-        isHeld = true;
-        getContent().style.cursor = "grabbing";
-        shipElement.querySelector("img").src = usedImageSrc;
-      }, 100); // Hold for 500ms to trigger
+      getContent().style.cursor = "grabbing";
     });
 
-    // Cancel hold on mouseup or mouseleave
-    shipElement.addEventListener("mouseup", () => clearTimeout(timer));
-    shipElement.addEventListener("mouseleave", () => clearTimeout(timer));
+    shipElement.addEventListener("mouseup", () => {
+      getContent().style.cursor = "default";
+    });
+
+    shipElement.addEventListener("mouseleave", () => {
+      getContent().style.cursor = "default";
+    });
   }
 
+  const shipParts1 = createDiv("ship-group");
+
   const battleship = createShipSquares(new Battleship(), BattleshipImg);
-  addShipClickBehavior(battleship, UsedBattleshipImg);
+  addGrabbingBehavior(battleship);
 
   const cruiser = createShipSquares(new Cruiser(), CruiserImg);
-  addShipClickBehavior(cruiser, UsedCruiserImg);
+  addGrabbingBehavior(cruiser);
+
+  appendAll(shipParts1, battleship, cruiser);
+
+  const shipParts2 = createDiv("ship-group");
 
   const destroyer = createShipSquares(new Destroyer(), DestroyerImg);
-  addShipClickBehavior(destroyer, UsedDestroyerImg);
+  addGrabbingBehavior(destroyer);
 
   const patrolBoat = createShipSquares(new PatrolBoat(), PatrolBoatImg);
-  addShipClickBehavior(patrolBoat, UsedPatrolBoatImg);
+  addGrabbingBehavior(patrolBoat);
 
   const rescueShip = createShipSquares(new RescueShip(), RescueShipImg);
-  addShipClickBehavior(rescueShip, UsedRescueShipImg);
+  addGrabbingBehavior(rescueShip);
 
-  appendAll(ships, battleship, cruiser, destroyer, patrolBoat, rescueShip);
+  appendAll(shipParts2, destroyer, patrolBoat, rescueShip);
+
+  appendAll(ships, shipParts1, shipParts2);
 
   // Sets the orientation.
   toggleOrientation();
