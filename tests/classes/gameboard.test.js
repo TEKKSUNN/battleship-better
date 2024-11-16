@@ -18,6 +18,7 @@ describe("Gameboard", () => {
           [null, null, null, null, null, null, null, null, null, null],
         ],
         misses: 0,
+        ships: [],
       });
     });
 
