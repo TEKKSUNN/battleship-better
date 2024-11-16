@@ -167,9 +167,7 @@ export default class Gameboard {
 
   // Resets gameboard map.
   resetBoard() {
-    this.gameboard = Array.from({ length: 10 }, () =>
-      new Array(10).fill(null),
-    );
+    this.gameboard = Array.from({ length: 10 }, () => new Array(10).fill(null));
     this.ships = [];
     this.misses = 0;
   }

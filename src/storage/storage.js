@@ -12,6 +12,6 @@ export function storageGet(key, constructorFn) {
     Object.assign(instance, data); // Copy data properties to the new instance
     return instance;
   }
-  
+
   return data;
 }
