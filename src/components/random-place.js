@@ -11,4 +11,6 @@ export function createRandomPlaceButton(GameboardObject, boardNode) {
     setPlayerBoard(GameboardObject);
     boardNode.innerHTML = getBoard(getPlayerBoard()).innerHTML;
   });
+
+  return button;
 }
