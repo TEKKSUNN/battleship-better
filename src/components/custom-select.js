@@ -101,7 +101,7 @@ export default function createCustomSelect(
   optList.style.maxHeight = "200px"; // Set maximum height for the dropdown list
   optList.style.overflowY = "auto"; // Enable scrolling if options exceed the height
   optList.style.position = "absolute";
-  optList.style.top = "50px"; // Make it go below the optList when shown.
+  optList.style.top = "51px"; // Make it go below the optList when shown.
 
   // Toggle dropdown visibility when the input is clicked.
   icon.addEventListener("click", () => {
