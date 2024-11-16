@@ -4,7 +4,7 @@ const key = "orientation";
 
 // Toggles value of orientation in sessionStorage.
 export function toggleOrientation() {
-  storageSet(key, storageGet(key) === "horizontal" ? "vertical" : "horizontal");
+  storageSet(key, storageGet(key) === "HORIZONTAL" ? "VERTICAL" : "HORIZONTAL");
 }
 
 // Gets value of orientation
