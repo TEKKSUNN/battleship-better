@@ -152,6 +152,7 @@ export default class Gameboard {
 
   // Random places all 5 templates of ship.
   randomPlaceAllShips() {
+    this.resetBoard();
     const ships = [
       new Battleship(),
       new Cruiser(),
