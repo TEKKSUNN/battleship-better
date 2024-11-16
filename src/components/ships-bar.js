@@ -29,7 +29,7 @@ import createShipSquares from "./ship";
 import { createImageButton } from "../dom/elements/buttons";
 import { getOrientation, toggleOrientation } from "../storage/orientation";
 import { createPara } from "../dom/elements/texts";
-import { appendAll } from "../dom/helpers";
+import { appendAll, getContent } from "../dom/helpers";
 
 // Returns a ship bar w/ rotate button.
 export function createShipBar() {
@@ -55,9 +55,9 @@ export function createShipBar() {
       isHeld = false;
       timer = setTimeout(() => {
         isHeld = true;
-        document.style.cursor = "grabbing";
+        getContent().style.cursor = "grabbing";
         shipElement.querySelector("img").src = usedImageSrc;
-      }, 500); // Hold for 500ms to trigger
+      }, 100); // Hold for 500ms to trigger
     });
 
     // Cancel hold on mouseup or mouseleave
