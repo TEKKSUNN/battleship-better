@@ -17,11 +17,11 @@ export default class Gameboard {
       new Array(size).fill(null),
     );
     this.misses = 0;
+    this.ships = []; // Tracks all ships placed on the board.
   }
 
   // Places a ship somewhere on the board.
   placeShip(ShipObject, yPos, xPos, orientation) {
-    // If any of the values are missing:
     if (
       (ShipObject === undefined) |
       (xPos === undefined) |
@@ -33,15 +33,12 @@ export default class Gameboard {
       );
     }
 
-    // Position values are invalid:
-    // - when not a safe integer
     if (!Number.isSafeInteger(xPos) | !Number.isSafeInteger(yPos)) {
       throw new MethodError(
         "Gameboard.placeShip() xPos, yPos must be safe integers.",
       );
     }
 
-    // - when lesser than 0 or greater than gameboard's length - 1
     if (
       (xPos < 0) |
       (xPos > this.indiceLength) |
@@ -53,29 +50,47 @@ export default class Gameboard {
       );
     }
 
-    // If orientation value is invalid:
     if (orientation !== "landscape" && orientation !== "portrait") {
       throw new MethodError(
         'Gameboard.placeShip() orientation must be "landscape" or "portrait".',
       );
     }
 
-    // Placing the ships.
+    // Ensure placement is valid and does not overlap
+    const isPlacementValid = (x, y, length, orientation) => {
+      if (orientation === "landscape") {
+        return (
+          x + length - 1 <= this.indiceLength &&
+          this.gameboard[y].slice(x, x + length).every((cell) => cell === null)
+        );
+      } else {
+        return (
+          y + length - 1 <= this.indiceLength &&
+          this.gameboard.slice(y, y + length).every((row) => row[x] === null)
+        );
+      }
+    };
+
+    if (!isPlacementValid(xPos, yPos, ShipObject.length, orientation)) {
+      throw new MethodError("Gameboard.placeShip() placement is invalid.");
+    }
+
+    // Place the ship
     if (orientation === "landscape") {
-      // Place ship horizontally-right 'till ship's length is reached.
-      for (let i = xPos; i < ShipObject.length; i++) {
-        this.gameboard[yPos][i] = ShipObject;
+      for (let i = 0; i < ShipObject.length; i++) {
+        this.gameboard[yPos][xPos + i] = ShipObject;
       }
     } else {
-      // Place ship vertically-downward 'till ship's length is reached.
-      for (let i = yPos; i < ShipObject.length; i++) {
-        this.gameboard[i][xPos] = ShipObject;
+      for (let i = 0; i < ShipObject.length; i++) {
+        this.gameboard[yPos + i][xPos] = ShipObject;
       }
     }
+
+    this.ships.push(ShipObject); // Track the ship
   }
 
   receiveAttack(yPos, xPos) {
-    // If there is a Ship on the coords:
+    // If there is a ship on the coords.
     if (this.gameboard[yPos][xPos] !== null) {
       this.gameboard[yPos][xPos].hit();
       return "hit";
@@ -86,18 +101,7 @@ export default class Gameboard {
   }
 
   isAllShipSunk() {
-    // Check all of gameboard and return false if a ship doesn't return true when it's method "isSunk" is called.
-    let res = true;
-    this.gameboard.forEach((array) => {
-      array.forEach((value) => {
-        if (value !== null) {
-          if (!value.isSunk()) {
-            res = false;
-          }
-        }
-      });
-    });
-    return res;
+    return this.ships.every((ship) => ship.isSunk());
   }
 
   get size() {
@@ -106,5 +110,36 @@ export default class Gameboard {
 
   get indiceLength() {
     return this.size - 1;
+  }
+
+  // Checks if the maximum number of ships (5) has been placed
+  isMaxShips() {
+    return this.ships.length >= 5;
+  }
+
+  // Places a ship at a random valid position with random orientation
+  randomPlaceShip(ShipObject) {
+    if (this.isMaxShips()) {
+      throw new MethodError(
+        "Gameboard.randomPlaceShip() maximum ships placed.",
+      );
+    }
+
+    const orientations = ["landscape", "portrait"];
+    let placed = false;
+
+    while (!placed) {
+      const xPos = Math.floor(Math.random() * this.size);
+      const yPos = Math.floor(Math.random() * this.size);
+      const orientation =
+        orientations[Math.floor(Math.random() * orientations.length)];
+
+      try {
+        this.placeShip(ShipObject, yPos, xPos, orientation);
+        placed = true;
+      } catch {
+        // If placement fails, try again
+      }
+    }
   }
 }
