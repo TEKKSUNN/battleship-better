@@ -6,3 +6,5 @@ const key = "computerBoard";
 export const resetComputerBoard = () => storageSet(key, new Computer());
 
 export const getComputerBoard = () => storageGet(key);
+
+export const setComputerBoard = (newBoard) => storageSet(key, newBoard);
