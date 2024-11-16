@@ -6,3 +6,6 @@ const key = "orientation";
 export function toggleOrientation() {
   storageSet(key, storageGet(key) === "horizontal" ? "vertical" : "horizontal");
 }
+
+// Gets value of orientation
+export const getOrientation = () => storageGet(key);
