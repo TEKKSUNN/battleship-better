@@ -167,8 +167,8 @@ export default class Gameboard {
 
   // Resets gameboard map.
   resetBoard() {
-    this.gameboard = Array.from({ length: size }, () =>
-      new Array(size).fill(null),
+    this.gameboard = Array.from({ length: 10 }, () =>
+      new Array(10).fill(null),
     );
   }
 }
