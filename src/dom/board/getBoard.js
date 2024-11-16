@@ -8,12 +8,9 @@ export function getBoard(gameboard) {
     throw new HTMLError("getBoard() takes one argument, got none.");
   }
 
-  // Identify types of gameboard
-  const gameboardTypes = ["Player", "Computer", "Gameboard"];
-
-  // Throw error when gameboard is not Gameboard type.
-  if (!gameboardTypes.includes(typeof gameboard)) {
-    throw new HTMLError("getBoard() must have a Gameboard type as argument.");
+  // Throw error when gameboard is not an object.
+  if (typeof gameboard !== "object") {
+    throw new HTMLError("getBoard() must have an object as gameboard.");
   }
 
   // Declare grid.
