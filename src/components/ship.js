@@ -50,6 +50,8 @@ export default function createShipSquares(ShipObject, ShipImage) {
   const image = createImage(ShipImage, "ship-img");
   shipSquares.appendChild(image);
 
+  shipSquares.draggable = "true";
+
   return shipSquares;
 }
 
@@ -57,41 +59,21 @@ export function getShipSquares() {
   // Make the ships.
   const ships = createDiv("ships");
 
-  // Utility to add grabbing cursor behavior
-  function addGrabbingBehavior(shipElement) {
-    shipElement.addEventListener("mousedown", () => {
-      getContent().style.cursor = "grabbing";
-    });
-
-    shipElement.addEventListener("mouseup", () => {
-      getContent().style.cursor = "default";
-    });
-
-    shipElement.addEventListener("mouseleave", () => {
-      getContent().style.cursor = "default";
-    });
-  }
-
   const shipParts1 = createDiv("ship-group");
 
   const battleship = createShipSquares(new Battleship(), BattleshipImg);
-  addGrabbingBehavior(battleship);
 
   const cruiser = createShipSquares(new Cruiser(), CruiserImg);
-  addGrabbingBehavior(cruiser);
 
   appendAll(shipParts1, battleship, cruiser);
 
   const shipParts2 = createDiv("ship-group");
 
   const destroyer = createShipSquares(new Destroyer(), DestroyerImg);
-  addGrabbingBehavior(destroyer);
 
   const patrolBoat = createShipSquares(new PatrolBoat(), PatrolBoatImg);
-  addGrabbingBehavior(patrolBoat);
 
   const rescueShip = createShipSquares(new RescueShip(), RescueShipImg);
-  addGrabbingBehavior(rescueShip);
 
   appendAll(shipParts2, destroyer, patrolBoat, rescueShip);
 
