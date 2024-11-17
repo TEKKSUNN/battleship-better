@@ -27,7 +27,7 @@ import ComponentError from "./error";
 import { appendAll } from "../dom/helpers";
 
 // Returns a squares div w/ length of ShipObject.
-export default function createShipSquares(ShipObject, ShipImage) {
+export default function createShipSquares(ShipObject /* , ShipImage */) {
   // Throw error when not valid ShipObject.
   if (typeof ShipObject !== "object") {
     throw new ComponentError(
@@ -36,9 +36,9 @@ export default function createShipSquares(ShipObject, ShipImage) {
   }
 
   // Throw error when no ShipImage
-  if (!ShipImage) {
-    throw new ComponentError("createShipSquares() must have a ShipImage.");
-  }
+  // if (!ShipImage) {
+  //   throw new ComponentError("createShipSquares() must have a ShipImage.");
+  // }
 
   // Make ship squares.
   const shipSquares = createDiv("ship-squares");
@@ -61,19 +61,19 @@ export function getShipSquares() {
 
   const shipParts1 = createDiv("ship-group");
 
-  const battleship = createShipSquares(new Battleship(), BattleshipImg);
+  const battleship = createShipSquares(new Battleship());
 
-  const cruiser = createShipSquares(new Cruiser(), CruiserImg);
+  const cruiser = createShipSquares(new Cruiser());
 
   appendAll(shipParts1, battleship, cruiser);
 
   const shipParts2 = createDiv("ship-group");
 
-  const destroyer = createShipSquares(new Destroyer(), DestroyerImg);
+  const destroyer = createShipSquares(new Destroyer());
 
-  const patrolBoat = createShipSquares(new PatrolBoat(), PatrolBoatImg);
+  const patrolBoat = createShipSquares(new PatrolBoat());
 
-  const rescueShip = createShipSquares(new RescueShip(), RescueShipImg);
+  const rescueShip = createShipSquares(new RescueShip());
 
   appendAll(shipParts2, destroyer, patrolBoat, rescueShip);
 
