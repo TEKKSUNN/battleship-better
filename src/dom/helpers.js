@@ -28,3 +28,11 @@ export function clearContent() {
 export function toggleClass(element, className) {
   element.classList.toggle(className);
 }
+
+export function classAdd(element, className) {
+  element.classList.add(className);
+}
+
+export function classRemove(element, className) {
+  element.classList.remove(className);
+}
