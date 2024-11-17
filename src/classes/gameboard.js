@@ -82,6 +82,9 @@ export default class Gameboard {
       throw new MethodError("Gameboard.placeShip() placement is invalid.");
     }
 
+    // Set orientation property of ShipObject.
+    ShipObject.orientation = orientation;
+
     // Place the ship
     if (orientation === "landscape") {
       for (let i = 0; i < ShipObject.length; i++) {
