@@ -407,7 +407,7 @@ button {
 }
 
 .ship-square {
-  background-color: transparent;
+  background-color: #96bdff;
   cursor: grab;
 }
 
@@ -415,6 +415,12 @@ button {
   position: absolute;
   pointer-events: none;
   top: 0px;
+}
+
+.ships {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* Rotation button */
@@ -502,6 +508,16 @@ button {
 }
 
 /* Style grid ship images */
-.horizontal {
+/* .horizontal {
   transform: rotate(90deg);
+} */
+
+.horizontal .ship-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.horizontal .ship-squares {
+  display: flex;
+  flex-direction: row;
 }
