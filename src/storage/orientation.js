@@ -9,3 +9,6 @@ export function toggleOrientation() {
 
 // Gets value of orientation
 export const getOrientation = () => storageGet(key);
+
+// Resets orientation value to "HORIZONTAL"
+export const resetOrientation = () => storageSet(key, "HORIZONTAL");
