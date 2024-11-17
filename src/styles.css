@@ -521,3 +521,7 @@ button {
   display: flex;
   flex-direction: row;
 }
+
+.occupied {
+  cursor: grab;
+}
