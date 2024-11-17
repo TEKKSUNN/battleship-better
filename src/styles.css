@@ -408,10 +408,12 @@ button {
 
 .ship-square {
   background-color: transparent;
+  cursor: grab;
 }
 
 .ship-img {
   position: absolute;
+  pointer-events: none;
   top: 0px;
 }
 
@@ -474,4 +476,22 @@ button {
   border: 0;
   cursor: pointer;
   object-fit: cover;
+}
+
+/* Style exit game button */
+#content {
+  position: relative;
+  margin: 0px 120px;
+}
+
+.exit-btn {
+  --size: 40px;
+  width: var(--size);
+  height: var(--size);
+  background-color: transparent;
+  position: absolute;
+  top: 40px;
+  right: 0px;
+  border: 0;
+  cursor: pointer;
 }
