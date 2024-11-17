@@ -7,11 +7,15 @@ import { createButton } from "../../../dom/elements/buttons";
 import { createDiv } from "../../../dom/elements/divs";
 import { getContent, clearContent, appendAll } from "../../../dom/helpers";
 import { getPlayerBoard } from "../../../storage/player";
+import createExitGameButton from "../../../components/exit-game";
 
 // Loads place stage tab for Player in Player Vs Computer option.
 export function loadPlayerPlaceStage() {
   // Get content from template.html for alteration.
   const content = getContent();
+
+  // Get exit button.
+  const exitBtn = createExitGameButton();
 
   // Get objective.
   const objective = createObjective("Place your ships");
@@ -36,7 +40,7 @@ export function loadPlayerPlaceStage() {
   clearContent();
 
   // Append all to content.
-  appendAll(content, objective, shipHandleDiv, finishDiv);
+  appendAll(content, exitBtn, objective, shipHandleDiv, finishDiv);
 
   // Change class name of content.
   content.className = "place-ship";
