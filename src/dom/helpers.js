@@ -24,3 +24,7 @@ export function clearDialogs() {
 export function clearContent() {
   getContent().innerHTML = "";
 }
+
+export function toggleClass(element, className) {
+  element.classList.toggle(className);
+}
