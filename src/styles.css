@@ -495,3 +495,13 @@ button {
   border: 0;
   cursor: pointer;
 }
+
+/* Style occupied squares */
+.occupied {
+  background-color: #96bdff;
+}
+
+/* Style grid ship images */
+.horizontal {
+  transform: rotate(90deg);
+}
