@@ -16,6 +16,13 @@ export function getBoard(GameboardObject, GameboardStorageFN) {
     throw new HTMLError("getBoard() must have an object as gameboard.");
   }
 
+  // Throw error when no GameboardStorageFN or not a function
+  if (!GameboardStorageFN | (typeof GameboardStorageFN !== "function")) {
+    throw new HTMLError(
+      "getBoard() GameboardStorageFN missing or not a function",
+    );
+  }
+
   // Declare grid.
   const grid = createDiv("grid");
   // grid.style.position = "relative";
@@ -46,12 +53,16 @@ function setupBoard(GameboardHTML, GameboardObject, GameboardStorageFN) {
     // Change color of hovered cells
     if (data.orientation === "horizontal") {
       for (let i = 0; i < data.shipLength; i++) {
-        const cellHovered = document.querySelector(`.board-row.${data.rowIndex} .board-cell.${data.cellIndex + i}`);
+        const cellHovered = document.querySelector(
+          `.board-row.${data.rowIndex} .board-cell.${data.cellIndex + i}`,
+        );
         cellHovered.classList.add("dragover");
       }
     } else {
       for (let i = 0; i < data.shipLength; i++) {
-        const cellHovered = document.querySelector(`.board-row.${data.rowIndex + i} .board-cell.${data.cellIndex}`);
+        const cellHovered = document.querySelector(
+          `.board-row.${data.rowIndex + i} .board-cell.${data.cellIndex}`,
+        );
         cellHovered.classList.add("dragover");
       }
     }
@@ -64,18 +75,27 @@ function setupBoard(GameboardHTML, GameboardObject, GameboardStorageFN) {
     // Show board change visually
     if (data.orientation === "horizontal") {
       for (let i = 0; i < data.shipLength; i++) {
-        const cellHovered = document.querySelector(`.board-row.${data.rowIndex} .board-cell.${data.cellIndex + i}`);
+        const cellHovered = document.querySelector(
+          `.board-row.${data.rowIndex} .board-cell.${data.cellIndex + i}`,
+        );
         cellHovered.classList.add("occupied");
       }
     } else {
       for (let i = 0; i < data.shipLength; i++) {
-        const cellHovered = document.querySelector(`.board-row.${data.rowIndex + i} .board-cell.${data.cellIndex}`);
+        const cellHovered = document.querySelector(
+          `.board-row.${data.rowIndex + i} .board-cell.${data.cellIndex}`,
+        );
         cellHovered.classList.add("occupied");
       }
     }
 
     // Show board change in data
-    GameboardObject.placeShip(data.shipObject, data.rowIndex, data.cellIndex, data.orientation);
+    GameboardObject.placeShip(
+      data.shipObject,
+      data.rowIndex,
+      data.cellIndex,
+      data.orientation,
+    );
     GameboardStorageFN(GameboardObject);
   });
 }
