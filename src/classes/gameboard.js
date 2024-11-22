@@ -57,15 +57,15 @@ export default class Gameboard {
       );
     }
 
-    if (orientation !== "landscape" && orientation !== "portrait") {
+    if (orientation !== "horizontal" && orientation !== "vertical") {
       throw new MethodError(
-        'Gameboard.placeShip() orientation must be "landscape" or "portrait".',
+        'Gameboard.placeShip() orientation must be "horizontal" or "vertical".',
       );
     }
 
     // Ensure placement is valid and does not overlap
     const isPlacementValid = (x, y, length, orientation) => {
-      if (orientation === "landscape") {
+      if (orientation === "horizontal") {
         return (
           x + length - 1 <= this.indiceLength &&
           this.gameboard[y].slice(x, x + length).every((cell) => cell === null)
@@ -86,7 +86,7 @@ export default class Gameboard {
     ShipObject.orientation = orientation;
 
     // Place the ship
-    if (orientation === "landscape") {
+    if (orientation === "horizontal") {
       for (let i = 0; i < ShipObject.length; i++) {
         this.gameboard[yPos][xPos + i] = ShipObject;
       }
@@ -135,7 +135,7 @@ export default class Gameboard {
       );
     }
 
-    const orientations = ["landscape", "portrait"];
+    const orientations = ["horizontal", "vertical"];
     let placed = false;
 
     while (!placed) {
