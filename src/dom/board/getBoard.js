@@ -38,7 +38,7 @@ export function getBoard(GameboardObject, GameboardStorageFN) {
   });
 
   // Add appropriate drag events to grid
-  setupBoard(grid);
+  setupBoard(grid, GameboardObject, GameboardStorageFN);
 
   return grid;
 }
