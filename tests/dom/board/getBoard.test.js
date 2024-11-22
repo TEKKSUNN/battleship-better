@@ -7,4 +7,10 @@ describe("getBoard()", () => {
       "getBoard() takes one argument, got none.",
     );
   });
+
+  test("should throw an error when gameboard is not an object.", () => {
+    const errorMsg = "getBoard() must have an object as gameboard.";
+    expect(() => getBoard(1)).toThrow(errorMsg);
+    expect(() => getBoard("hee hee")).toThrow(errorMsg);
+  });
 });
