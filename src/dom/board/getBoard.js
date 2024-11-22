@@ -5,14 +5,14 @@ import { createImage } from "../elements/images";
 import { getSquaresHeight, getSquaresWidth } from "./squares";
 
 // Returns the gameboard, but now in html form.
-export function getBoard(gameboard) {
+export function getBoard(GameboardObject, GameboardStorageFN) {
   // Throw error when no gameboard.
-  if (!gameboard) {
+  if (!GameboardObject) {
     throw new HTMLError("getBoard() takes one argument, got none.");
   }
 
   // Throw error when gameboard is not an object.
-  if (typeof gameboard !== "object") {
+  if (typeof GameboardObject !== "object") {
     throw new HTMLError("getBoard() must have an object as gameboard.");
   }
 
@@ -21,41 +21,61 @@ export function getBoard(gameboard) {
   // grid.style.position = "relative";
 
   // Make all the squares & append it to grid
-  gameboard.gameboard.forEach((array) => {
-    const squares = createDiv("squares");
-    // Make the values of squares & append it to squares.
-    array.forEach((value) => {
-      const square = createDiv("square");
-
-      // Add more classes if it is a ship.
-      if (value !== null) {
-        // Get the ship methods for the value.
-        const instance = new Ship(1);
-        Object.assign(instance, value);
-        square.classList.add("occupied");
-
-        // Shows ship images.
-        // const shipImage = createImage(value.image, "ship-img");
-        // if (value.orientation === "landscape") {
-        //   shipImage.classList.add("horizontal");
-        // }
-        // shipImage.style.position = "absolute";
-        // shipImage.style.top = (getSquaresHeight() * row + 1) + "px";
-        // shipImage.style.left = (getSquaresWidth() * column + 1) + "px";
-
-        // grid.appendChild(shipImage);
-
-        if (instance.isSunk()) {
-          square.classList.add("ship-sunk");
-        }
-      }
-
-      squares.appendChild(square);
+  GameboardObject.gameboard.forEach((array, rowIndex) => {
+    const row = createDiv(`board-row ${rowIndex}`);
+    array.forEach((value, cellIndex) => {
+      const cell = createDiv(`board-cell ${cellIndex}`);
+      row.appendChild(cell);
     });
-
-    // Append to grid.
-    grid.appendChild(squares);
+    grid.appendChild(row);
   });
 
+  // Add appropriate drag events to grid
+  setupBoard(grid);
+
   return grid;
+}
+
+// Sets the drag event listeners for a grid/gameboard
+function setupBoard(GameboardHTML, GameboardObject, GameboardStorageFN) {
+  // Make squares hovered change color
+  GameboardHTML.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    const data = e.dataTransfer.getData("text/json");
+
+    // Change color of hovered cells
+    if (data.orientation === "horizontal") {
+      for (let i = 0; i < data.shipLength; i++) {
+        const cellHovered = document.querySelector(`.board-row.${data.rowIndex} .board-cell.${data.cellIndex + i}`);
+        cellHovered.classList.add("dragover");
+      }
+    } else {
+      for (let i = 0; i < data.shipLength; i++) {
+        const cellHovered = document.querySelector(`.board-row.${data.rowIndex + i} .board-cell.${data.cellIndex}`);
+        cellHovered.classList.add("dragover");
+      }
+    }
+  });
+
+  // Drop ship to board visually and in data
+  GameboardHTML.addEventListener("drop", (e) => {
+    const data = e.dataTransfer.getData("text/json");
+
+    // Show board change visually
+    if (data.orientation === "horizontal") {
+      for (let i = 0; i < data.shipLength; i++) {
+        const cellHovered = document.querySelector(`.board-row.${data.rowIndex} .board-cell.${data.cellIndex + i}`);
+        cellHovered.classList.add("occupied");
+      }
+    } else {
+      for (let i = 0; i < data.shipLength; i++) {
+        const cellHovered = document.querySelector(`.board-row.${data.rowIndex + i} .board-cell.${data.cellIndex}`);
+        cellHovered.classList.add("occupied");
+      }
+    }
+
+    // Show board change in data
+    GameboardObject.placeShip(data.shipObject, data.rowIndex, data.cellIndex, data.orientation);
+    GameboardStorageFN(GameboardObject);
+  });
 }
