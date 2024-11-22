@@ -57,7 +57,7 @@ describe("Gameboard", () => {
         const errorMsg =
           "Gameboard.placeShip() xPos, yPos must be safe integers.";
         expect(() =>
-          gameboard.placeShip(new Ship(5), 3.4, 5.8, "landscape"),
+          gameboard.placeShip(new Ship(5), 3.4, 5.8, "horizontal"),
         ).toThrow(errorMsg);
         expect(() =>
           gameboard.placeShip(new Ship(5), 2.5, 7.9, "vertical"),
@@ -71,7 +71,7 @@ describe("Gameboard", () => {
         const errorMsg =
           "Gameboard.placeShip() xPos, yPos must be within board's indice length.";
         expect(() =>
-          gameboard.placeShip(new Ship(5), 3, -1, "landscape"),
+          gameboard.placeShip(new Ship(5), 3, -1, "horizontal"),
         ).toThrow(errorMsg);
         expect(() =>
           gameboard.placeShip(new Ship(5), 100, -5, "vertical"),
@@ -83,7 +83,7 @@ describe("Gameboard", () => {
 
       test("should throw an error when orientation isn't landscape nor portrait.", () => {
         const errorMsg =
-          'Gameboard.placeShip() orientation must be "landscape" or "portrait".';
+          'Gameboard.placeShip() orientation must be "horizontal" or "vertical".';
         expect(() => gameboard.placeShip(new Ship(5), 3, 5, "orange")).toThrow(
           errorMsg,
         );
@@ -108,7 +108,7 @@ describe("Gameboard", () => {
 
         // Test all ships.
         ships.forEach((ship, index) => {
-          gameboard.placeShip(ship, index, 0, "landscape");
+          gameboard.placeShip(ship, index, 0, "horizontal");
           testXCoords(ship, index, 0);
         });
       });
@@ -126,7 +126,7 @@ describe("Gameboard", () => {
 
         // Test all ships.
         ships.forEach((ship, index) => {
-          gameboard.placeShip(ship, 0, index, "portrait");
+          gameboard.placeShip(ship, 0, index, "vertical");
           testYCoords(ship, 0, index);
         });
       });
@@ -146,7 +146,7 @@ describe("Gameboard", () => {
 
         // Place all ships.
         ships.forEach((ship, index) => {
-          gameboard.placeShip(ship, index, 0, "landscape");
+          gameboard.placeShip(ship, index, 0, "horizontal");
         });
 
         // Hit vertically-downward.
@@ -174,7 +174,7 @@ describe("Gameboard", () => {
 
         // Place and hit all ships.
         ships.forEach((ship, index) => {
-          gameboard.placeShip(ship, index, 0, "landscape");
+          gameboard.placeShip(ship, index, 0, "horizontal");
           hitAllHorizontally(ship, index, 0);
         });
 
@@ -195,7 +195,7 @@ describe("Gameboard", () => {
 
         // Place and hit all ships except the last ship.
         ships.forEach((ship, index) => {
-          gameboard.placeShip(ship, index, 0, "landscape");
+          gameboard.placeShip(ship, index, 0, "horizontal");
           if (index !== ships.length - 1) {
             hitAllHorizontally(ship, index, 0);
           }
