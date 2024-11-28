@@ -26,6 +26,7 @@ import { createImage } from "../dom/elements/images";
 import ComponentError from "./error";
 import { appendAll } from "../dom/helpers";
 import { getOrientation } from "../storage/orientation";
+import { getPlaceStatus } from "../storage/place-status";
 
 // Returns a squares div w/ length of ShipObject.
 export default function createShipSquares(ShipObject /* , ShipImage */) {
@@ -71,6 +72,7 @@ function setupShipSquares(shipSquares, ShipObject) {
   });
 
   shipSquares.addEventListener("dragend", (e) => {
+    if (getPlaceStatus() === "failed") return;
     shipSquares.classList.add("used");
     shipSquares.setAttribute("draggable", "false");
     shipSquares.addEventListener("dragstart", (e) => {

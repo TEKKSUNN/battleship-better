@@ -3,6 +3,10 @@ import { createDiv } from "../elements/divs";
 import Ship from "../../classes/ships";
 import { createImage } from "../elements/images";
 import { getSquaresHeight, getSquaresWidth } from "./squares";
+import {
+  makePlaceStatusSuccess,
+  makePlaceStatusFailed,
+} from "../../storage/place-status";
 
 // Returns the gameboard, but now in html form.
 export function getBoard(GameboardObject, GameboardStorageFN) {
@@ -84,6 +88,21 @@ function setupBoard(GameboardHTML, GameboardObject, GameboardStorageFN) {
     const cssCell = cellIndex + numStart;
     const cssRow = rowIndex + numStart;
 
+    // Show board change in data
+    try {
+      GameboardObject.placeShip(
+        data.shipObject,
+        rowIndex,
+        cellIndex,
+        data.orientation,
+      );
+      makePlaceStatusSuccess();
+    } catch {
+      makePlaceStatusFailed();
+      return;
+    }
+    GameboardStorageFN(GameboardObject);
+
     // Show board change visually
     if (data.orientation === "horizontal") {
       for (let i = 0; i < data.shipLength; i++) {
@@ -100,14 +119,5 @@ function setupBoard(GameboardHTML, GameboardObject, GameboardStorageFN) {
         cellHovered.classList.add("occupied");
       }
     }
-
-    // Show board change in data
-    GameboardObject.placeShip(
-      data.shipObject,
-      rowIndex,
-      cellIndex,
-      data.orientation,
-    );
-    GameboardStorageFN(GameboardObject);
   });
 }
