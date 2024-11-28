@@ -370,11 +370,12 @@ button {
   background-color: #6b7280;
 }
 
-.squares {
+.board-row {
   display: flex;
   gap: 2.5px;
 }
 
+.board-cell,
 .square {
   width: var(--square-size);
   height: var(--square-size);
