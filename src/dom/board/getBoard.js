@@ -96,9 +96,6 @@ function setupBoard(GameboardHTML, GameboardObject, GameboardStorageFN) {
       }
     }
 
-    // Console log all values
-    console.log({ cell, cellIndex, rowIndex, data});
-
     // Show board change in data
     GameboardObject.placeShip(
       data.shipObject,
