@@ -67,6 +67,14 @@ function setupShipSquares(shipSquares, ShipObject) {
       orientation: getOrientation(),
     }));
   });
+
+  shipSquares.addEventListener("dragend", (e) => {
+    shipSquares.classList.add("used");
+    shipSquares.setAttribute("draggable", "false");
+    shipSquares.addEventListener("dragstart", (e) => {
+      e.preventDefault();
+    });
+  });
 }
 
 export function getShipSquares() {
