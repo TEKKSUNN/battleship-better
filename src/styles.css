@@ -424,6 +424,10 @@ button {
   gap: 10px;
 }
 
+.used .ship-square {
+  background-color: #000;
+}
+
 /* Rotation button */
 .rotate-div {
   --rotate-color: #f97316;
