@@ -79,18 +79,23 @@ function setupBoard(GameboardHTML, GameboardObject, GameboardStorageFN) {
     const cellIndex = parseInt(cell.getAttribute("cell-index"));
     const rowIndex = parseInt(cell.getAttribute("row-index"));
 
+    // Make css safe numbers of cell data
+    const numStart = 30;
+    const cssCell = cellIndex + numStart;
+    const cssRow = rowIndex + numStart;
+
     // Show board change visually
     if (data.orientation === "horizontal") {
       for (let i = 0; i < data.shipLength; i++) {
         const cellHovered = document.querySelector(
-          `.board-row.\\${30 + rowIndex} > .board-cell.\\${30 + cellIndex + i}`,
+          `.board-row.\\${cssRow} > .board-cell.\\${cssCell + i}`,
         );
         cellHovered.classList.add("occupied");
       }
     } else {
       for (let i = 0; i < data.shipLength; i++) {
         const cellHovered = document.querySelector(
-          `.board-row.\\${30 + rowIndex + i} > .board-cell.\\${30 + cellIndex}`,
+          `.board-row.\\${cssRow + i} > .board-cell.\\${cssCell}`,
         );
         cellHovered.classList.add("occupied");
       }
