@@ -6,7 +6,7 @@ import { getBoard } from "../../../dom/board/getBoard";
 import { createButton } from "../../../dom/elements/buttons";
 import { createDiv } from "../../../dom/elements/divs";
 import { getContent, clearContent, appendAll } from "../../../dom/helpers";
-import { getPlayerBoard } from "../../../storage/player";
+import { getPlayerBoard, setPlayerBoard } from "../../../storage/player";
 import createExitGameButton from "../../../components/exit-game";
 
 // Loads place stage tab for Player in Player Vs Computer option.
@@ -22,7 +22,7 @@ export function loadPlayerPlaceStage() {
 
   // Make board, ships image, and rotate button.
   const shipHandleDiv = createDiv("ship-handle");
-  const board = getBoard(getPlayerBoard());
+  const board = getBoard(getPlayerBoard(), setPlayerBoard);
   const shipBar = createShipBar();
   appendAll(shipHandleDiv, board, shipBar);
 

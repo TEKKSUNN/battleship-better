@@ -17,11 +17,12 @@ export function createShipBar() {
   ships.classList.add("horizontal");
 
   // Make the rotate button.
+  const upperOrientation = getOrientation().toUpperCase();
   const rotateDiv = createDiv("rotate-div");
-  const rotateLabel = createPara(getOrientation(), "rotate-label");
+  const rotateLabel = createPara(upperOrientation, "rotate-label");
   const rotateButton = createImageButton(RotateIcon, "rotate-btn", () => {
     toggleOrientation();
-    rotateLabel.textContent = getOrientation();
+    rotateLabel.textContent = getOrientation().toUpperCase();
     ships.classList.toggle("horizontal");
   });
   appendAll(rotateDiv, rotateButton, rotateLabel);

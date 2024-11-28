@@ -32,6 +32,8 @@ export function getBoard(GameboardObject, GameboardStorageFN) {
     const row = createDiv(`board-row ${rowIndex}`);
     array.forEach((value, cellIndex) => {
       const cell = createDiv(`board-cell ${cellIndex}`);
+      cell.setAttribute("cell-index", cellIndex);
+      cell.setAttribute("row-index", rowIndex);
       row.appendChild(cell);
     });
     grid.appendChild(row);
@@ -70,30 +72,38 @@ function setupBoard(GameboardHTML, GameboardObject, GameboardStorageFN) {
 
   // Drop ship to board visually and in data
   GameboardHTML.addEventListener("drop", (e) => {
-    const data = e.dataTransfer.getData("text/json");
+    const data = JSON.parse(e.dataTransfer.getData("text/plain"));
+
+    // Get cell data
+    const cell = e.target;
+    const cellIndex = parseInt(cell.getAttribute("cell-index"));
+    const rowIndex = parseInt(cell.getAttribute("row-index"));
 
     // Show board change visually
     if (data.orientation === "horizontal") {
       for (let i = 0; i < data.shipLength; i++) {
         const cellHovered = document.querySelector(
-          `.board-row.${data.rowIndex} .board-cell.${data.cellIndex + i}`,
+          `.board-row.\\${30 + rowIndex} > .board-cell.\\${30 + cellIndex + i}`,
         );
         cellHovered.classList.add("occupied");
       }
     } else {
       for (let i = 0; i < data.shipLength; i++) {
         const cellHovered = document.querySelector(
-          `.board-row.${data.rowIndex + i} .board-cell.${data.cellIndex}`,
+          `.board-row.\\${30 + rowIndex + i} > .board-cell.\\${30 + cellIndex}`,
         );
         cellHovered.classList.add("occupied");
       }
     }
 
+    // Console log all values
+    console.log({ cell, cellIndex, rowIndex, data});
+
     // Show board change in data
     GameboardObject.placeShip(
       data.shipObject,
-      data.rowIndex,
-      data.cellIndex,
+      rowIndex,
+      cellIndex,
       data.orientation,
     );
     GameboardStorageFN(GameboardObject);

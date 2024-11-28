@@ -25,6 +25,7 @@ import { createDiv } from "../dom/elements/divs";
 import { createImage } from "../dom/elements/images";
 import ComponentError from "./error";
 import { appendAll } from "../dom/helpers";
+import { getOrientation } from "../storage/orientation";
 
 // Returns a squares div w/ length of ShipObject.
 export default function createShipSquares(ShipObject /* , ShipImage */) {
@@ -52,7 +53,20 @@ export default function createShipSquares(ShipObject /* , ShipImage */) {
 
   shipSquares.draggable = "true";
 
+  setupShipSquares(shipSquares, ShipObject);
+
   return shipSquares;
+}
+
+function setupShipSquares(shipSquares, ShipObject) {
+  shipSquares.addEventListener("dragstart", (e) => {
+    e.dataTransfer.setData("text/plain", JSON.stringify(
+    {
+      shipLength: ShipObject.length,
+      shipObject: ShipObject,
+      orientation: getOrientation(),
+    }));
+  });
 }
 
 export function getShipSquares() {
