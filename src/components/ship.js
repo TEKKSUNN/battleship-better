@@ -60,12 +60,14 @@ export default function createShipSquares(ShipObject /* , ShipImage */) {
 
 function setupShipSquares(shipSquares, ShipObject) {
   shipSquares.addEventListener("dragstart", (e) => {
-    e.dataTransfer.setData("text/plain", JSON.stringify(
-    {
-      shipLength: ShipObject.length,
-      shipObject: ShipObject,
-      orientation: getOrientation(),
-    }));
+    e.dataTransfer.setData(
+      "text/plain",
+      JSON.stringify({
+        shipLength: ShipObject.length,
+        shipObject: ShipObject,
+        orientation: getOrientation(),
+      }),
+    );
   });
 
   shipSquares.addEventListener("dragend", (e) => {
